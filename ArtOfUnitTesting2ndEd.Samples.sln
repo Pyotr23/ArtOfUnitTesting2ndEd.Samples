@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOfUnitTesting2ndEd.Samples.sln", "ArtOfUnitTesting2ndEd.Samples.sln.csproj", "{1C00771F-5DD5-4760-8758-05F23AFCB3C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogAn", "LogAn\LogAn.csproj", "{98536F43-F1A3-45E2-AF94-9F5D7CCB5F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogAn.UnitTests", "LogAn.UnitTests\LogAn.UnitTests.csproj", "{97AFAAAD-CAC5-48B4-A75F-DF8DECFCA6B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1C00771F-5DD5-4760-8758-05F23AFCB3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C00771F-5DD5-4760-8758-05F23AFCB3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C00771F-5DD5-4760-8758-05F23AFCB3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C00771F-5DD5-4760-8758-05F23AFCB3C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98536F43-F1A3-45E2-AF94-9F5D7CCB5F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98536F43-F1A3-45E2-AF94-9F5D7CCB5F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98536F43-F1A3-45E2-AF94-9F5D7CCB5F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98536F43-F1A3-45E2-AF94-9F5D7CCB5F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97AFAAAD-CAC5-48B4-A75F-DF8DECFCA6B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97AFAAAD-CAC5-48B4-A75F-DF8DECFCA6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97AFAAAD-CAC5-48B4-A75F-DF8DECFCA6B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97AFAAAD-CAC5-48B4-A75F-DF8DECFCA6B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
