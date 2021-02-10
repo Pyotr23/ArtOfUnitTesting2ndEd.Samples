@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace LogAn
 {
@@ -6,7 +7,14 @@ namespace LogAn
     {
         public bool IsValidLogFileName(string fileName)
         {
-            return fileName.EndsWith(".SLF", StringComparison.CurrentCultureIgnoreCase);
+            if (string.IsNullOrEmpty(fileName))
+                throw new ArgumentNullException("имя файла должно быть задано");
+
+            var extension = Path.GetExtension(fileName);
+            return string.Equals(
+                extension, 
+                ".SLF", 
+                StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }
