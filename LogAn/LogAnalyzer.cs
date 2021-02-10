@@ -6,7 +6,7 @@ namespace LogAn
     {
         public bool IsValidLogFileName(string fileName)
         {
-            return fileName.EndsWith(".SLF");
+            return fileName.EndsWith(".SLF", StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }
