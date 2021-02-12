@@ -14,7 +14,7 @@ namespace LogAn.UnitTests
             bool result = analyzer.IsValidLogFileName("fileWithBadExtension.foo");
 
             Assert.False(result);
-        }        
+        }
 
         [TestCase("filewithgoodextension.SLF")]
         [TestCase("fileWithGoodExtension.slf")]
@@ -35,6 +35,17 @@ namespace LogAn.UnitTests
             var ex = Assert.Catch<Exception>(() => analyzer.IsValidLogFileName(""));
 
             StringAssert.Contains("имя файла должно быть задано", ex.Message);
+        }
+
+        [TestCase("badname.foo", false)]
+        [TestCase("goodname.slf", true)]
+        public void IsValidFileName_WhenCalled_ChangesWasLastFileNameValid(string fileName, bool expected)
+        {
+            var analyzer = CreateAnalyzer();
+
+            analyzer.IsValidLogFileName(fileName);
+
+            Assert.AreEqual(expected, analyzer.WasLastFileNameValid);
         }
 
         private LogAnalyzer CreateAnalyzer()
