@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace LogAn
 {
@@ -23,6 +24,19 @@ namespace LogAn
             WasLastFileNameValid = isValid;
 
             return isValid;
+        }
+
+        public bool IsValidLogFileNameGettingFromConfig(string fileName)
+        {            
+            var extension = Path.GetExtension(fileName);
+
+            if (string.IsNullOrEmpty(extension))
+                return false;
+
+            var extensionWithoutDot = extension[1..];
+            var extensions = File.ReadAllLines("FileExtensions.txt");
+            
+            return extensions.Contains(extensionWithoutDot);
         }
     }
 }
