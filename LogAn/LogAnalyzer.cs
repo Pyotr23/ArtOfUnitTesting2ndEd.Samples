@@ -1,12 +1,21 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 
 namespace LogAn
 {
     public class LogAnalyzer
     {
+        private readonly IExtensionManager _manager;
+
         public bool WasLastFileNameValid { get; private set; }
+
+        public LogAnalyzer(IExtensionManager manager)
+        {
+            _manager = manager;
+        }
+
+        public LogAnalyzer()
+        { }
 
         public bool IsValidLogFileName(string fileName)
         {
@@ -27,9 +36,8 @@ namespace LogAn
         }
 
         public bool IsValidLogFileNameGettingFromConfig(string fileName)
-        {
-            IExtensionManager manager = new FileExtensionManager();
-            return manager.IsValid(fileName);
+        {            
+            return _manager.IsValid(fileName);
         }
     }
 }

@@ -6,8 +6,8 @@ namespace LogAn.Client
     {
         static void Main(string[] args)
         {
-            var analyzer = new LogAnalyzer();
-            var isValid = analyzer.IsValidLogFileNameGettingFromConfig("good.slf");
+            var analyzer = new LogAnalyzerUsingFactoryMethod();
+            var isValid = analyzer.IsValidLogFileName("good.slf");
             Console.WriteLine(isValid);
             Console.ReadKey();
         }

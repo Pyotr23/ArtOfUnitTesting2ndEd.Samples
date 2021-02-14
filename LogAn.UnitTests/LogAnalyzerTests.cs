@@ -48,9 +48,64 @@ namespace LogAn.UnitTests
             Assert.AreEqual(expected, analyzer.WasLastFileNameValid);
         }
 
+        [Test]
+        public void IsValidFileNameGettingFromConfig_NameSupportedExtension_ReturnsTrue()
+        {
+            var fakeManager = new FakeExtensionManager()
+            {
+                WillBeValid = true
+            };
+
+            var analyzer = new LogAnalyzer(fakeManager);
+
+            var result = analyzer.IsValidLogFileNameGettingFromConfig("good.slf");
+
+            Assert.True(result);
+        }
+
+        [Test]
+        public void OverrideTest()
+        {
+            var stub = new FakeExtensionManager
+            {
+                WillBeValid = true
+            };
+
+            var analyzer = new TestableLogAnalyzer(stub);
+
+            var result = analyzer.IsValidLogFileName("file.ext");
+
+            Assert.IsTrue(result);
+        }
+
         private LogAnalyzer CreateAnalyzer()
         {
             return new LogAnalyzer();
+        }
+    }
+
+    public class TestableLogAnalyzer : LogAnalyzerUsingFactoryMethod
+    {
+        private IExtensionManager _manager;
+
+        public TestableLogAnalyzer(IExtensionManager manager)
+        {
+            _manager = manager;
+        }
+
+        public override IExtensionManager GetManager()
+        {
+            return new FakeExtensionManager();
+        }
+    }
+
+    public class FakeExtensionManager : IExtensionManager
+    {
+        public bool WillBeValid { get; set; }
+
+        public bool IsValid(string fileName)
+        {
+            return true;
         }
     }
 }
