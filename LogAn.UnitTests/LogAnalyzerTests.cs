@@ -78,6 +78,37 @@ namespace LogAn.UnitTests
             Assert.IsTrue(result);
         }
 
+        [Test]
+        public void Analyze_TooShortFileName_CallsWebService()
+        {
+            var mockService = new FakeWebService();
+            var logAnalyzer = new LogAnalyzer(mockService);
+            var tooShortFileName = "abc.ext";
+
+            logAnalyzer.Analyze(tooShortFileName);
+
+            StringAssert.Contains("Слишком короткое имя файла abc.ext", mockService.LastError);
+        } 
+
+        [Test]
+        public void AnalyzeOrSend_WebServiceThrows_SendEmail()
+        {
+            var stubService = new FakeWebService
+            {
+                ToThrow = new Exception("fake exception")
+            };
+
+            var mockEmail = new FakeEmailService();
+            var analyzer = new LogAnalyzer(stubService, mockEmail);
+            var tooShortFileName ="abc.ext";
+
+            analyzer.AnalyzeOrSend(tooShortFileName);
+
+            StringAssert.Contains("someone@somewhere.com", mockEmail.To);
+            StringAssert.Contains("fake exception", mockEmail.Body);
+            StringAssert.Contains("can’t log", mockEmail.Subject);
+        }
+
         private LogAnalyzer CreateAnalyzer()
         {
             return new LogAnalyzer();
