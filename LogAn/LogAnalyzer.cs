@@ -11,6 +11,8 @@ namespace LogAn
 
         public bool WasLastFileNameValid { get; private set; }
 
+        public int MinNameLength { get; set; } = 8;
+
         public LogAnalyzer(IWebService service)
         {
             _service = service;
@@ -55,13 +57,13 @@ namespace LogAn
 
         public void Analyze(string fileName)
         {
-            if (fileName.Length < 8)
+            if (fileName.Length < MinNameLength)
                 _service.LogError("Слишком короткое имя файла " + fileName);
         }
 
         public void AnalyzeOrSend(string fileName)
         {
-            if (fileName.Length >= 8)
+            if (fileName.Length >= MinNameLength)
                 return;
 
             try

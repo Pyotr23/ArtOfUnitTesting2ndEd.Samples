@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using System;
 
 namespace LogAn.UnitTests
@@ -81,13 +82,16 @@ namespace LogAn.UnitTests
         [Test]
         public void Analyze_TooShortFileName_CallsWebService()
         {
-            var mockService = new FakeWebService();
-            var logAnalyzer = new LogAnalyzer(mockService);
+            var mockService = Substitute.For<IWebService>();
+            var logAnalyzer = new LogAnalyzer(mockService)
+            {
+                MinNameLength = 8
+            };
             var tooShortFileName = "abc.ext";
 
             logAnalyzer.Analyze(tooShortFileName);
 
-            StringAssert.Contains("Слишком короткое имя файла abc.ext", mockService.LastError);
+            mockService.Received().LogError("Слишком короткое имя файла abc.ext");
         } 
 
         [Test]
